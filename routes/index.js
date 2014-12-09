@@ -27,9 +27,12 @@ exports.jsonTest = function(req,res) {
 //Photo Ajax Routing
 exports.photoHandler = function(req, res) {
 
-   console.log("photo Request = > " , req.files.photo.name, req.files.photo.size);
+   //console.log("photo Request = > " , req.files.photo.name, req.files.photo.size);
+   console.dir(req.files.photo);
 
-   var dummyJSON = {"name"  : "jisu" , "age" : 40, "height" : "174cm"};
+   var photoInfo = req.files.photo;
+
+   var dummyJSON = {"name"  : photoInfo.name, "size" : photoInfo.size, "path" : "/uploads/" + photoInfo.name};
    var strJSON = JSON.stringify(dummyJSON);
    res.end(strJSON);
 };

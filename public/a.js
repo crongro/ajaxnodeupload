@@ -36,8 +36,6 @@
 				var files = elSelect.files;
 				var formData = new FormData();
 
-				alert(files[0]);
-				alert(files[0].name);
 				formData.append('photo', files[0], files[0].name);
 
 				//Ajax
@@ -46,6 +44,5 @@
 		}
 
 		submitFile();
-
 
 })();

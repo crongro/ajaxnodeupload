@@ -24,7 +24,7 @@ app.use(express.logger('dev'));
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
-app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + "/uploads" }));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + "/uploads/uploads/" }));
 app.use(app.router);
 
 //compress content
@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public'), {maxAge : 365 * 24 * 60 *
 // app.use(express.static(path.join(__dirname, 'views'), {maxAge : 365 * 24 * 60 * 60 * 1000}));
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 
