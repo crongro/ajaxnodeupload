@@ -57,6 +57,28 @@ app.get('/jsonTest', routes.jsonTest);
 app.post('/photoUpload', routes.photoHandler);
 //app.get('/urisunsu', routes.urisunsu(db));
 
+//routing test
+// a middleware sub-stack which handles GET requests to /user/:id
+app.get('/user/:id', function (req, res, next) {
+  console.log('ID:', req.params.id);
+  next();
+}, function (req, res, next) {
+  res.send('User Info');
+});
+
+
+app.get('/userpage/:id', function (req, res, next) {
+  res.render('special');
+});
+
+// redirect.
+app.get('/htmltest', function (req, res, next) {
+  res.sendfile('./public/a.html');
+});
+
+
+// rounting test end
+
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

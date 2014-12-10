@@ -16,13 +16,21 @@
 	        request.onload = function() {
 
 	        	if(request.status === 200) {
-					elButton.innerHTML = "Uploaded !!";
+
+	        		try {
+						elButton.innerHTML = "Uploaded !!";
+			        	var result = JSON.parse(request.responseText);
+			        	console.log("file Info -> " , result.aPhotoInfo[0].path,result.aPhotoInfo[1].path);
+	        		} catch(error) {
+	        			console.log("error....", error.message);
+	        		}
+
 	        	} else {
+
 	        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
+
 	        	}
 
-	        	var result = request.responseText;
-	        	console.log("onload test -> " , result);
 	        };
 
 		}
@@ -36,7 +44,9 @@
 				var files = elSelect.files;
 				var formData = new FormData();
 
-				formData.append('photo', files[0], files[0].name);
+				for (var i = files.length - 1; i >= 0; i--) {
+					formData.append('photo', files[i], files[i].name);
+				}
 
 				//Ajax
 				sendAjax("POST", "http://localhost:8019/photoUpload", formData);
