@@ -15,27 +15,17 @@
 
 	        request.onload = function() {
 
-	        	if(request.status === 200) {
-
-	        		try {
-						elButton.innerHTML = "Uploaded !!";
-			        	var result = JSON.parse(request.responseText);
-			        	console.log("file Info -> " , result.aPhotoInfo[0].path,result.aPhotoInfo[1].path);
-	        		} catch(error) {
-	        			console.log("error....", error.message);
-	        		}
-
-	        	} else {
-
-	        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
-
-	        	}
-
-	        };
-
+	        if(request.status === 200) {
+				elButton.innerHTML = "Uploaded !!";
+	        	var result = JSON.parse(request.responseText);
+	        	//일시적인 테스트 용도
+	        	_checkResult(result);
+        	} else {
+        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
+	        }
 		}
 
-		function submitFile() {
+		(function() {
 
 			elForm.addEventListener("submit" , function(e) {
 				e.preventDefault();
@@ -51,8 +41,10 @@
 				//Ajax
 				sendAjax("POST", "http://localhost:8019/photoUpload", formData);
 			});
-		}
+		})();
 
-		submitFile();
+		function _checkResult(result) {
+			console.log("file Info -> " , result.aPhotoInfo[0].path,result.aPhotoInfo[1].path);
+		}
 
 })();
