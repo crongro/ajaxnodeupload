@@ -15,14 +15,15 @@
 
 	        request.onload = function() {
 
-	        if(request.status === 200) {
-				elButton.innerHTML = "Uploaded !!";
-	        	var result = JSON.parse(request.responseText);
-	        	//일시적인 테스트 용도
-	        	_checkResult(result);
-        	} else {
-        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
-	        }
+		        if(request.status === 200) {
+					elButton.innerHTML = "Uploaded !!";
+		        	var result = JSON.parse(request.responseText);
+		        	//일시적인 테스트 용도
+		        	_checkResult(result);
+	        	} else {
+	        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
+		        }
+		    }
 		}
 
 		(function() {
@@ -44,7 +45,9 @@
 		})();
 
 		function _checkResult(result) {
-			console.log("file Info -> " , result.aPhotoInfo[0].path,result.aPhotoInfo[1].path);
+			var _nLen = result.photoLen;	        	
+			for (var i = _nLen-1; i >= 0; i--) {
+				console.log("file Info -> " , result.aPhotoInfo[i].path,result.aPhotoInfo[i].size);
+			}
 		}
-
 })();
