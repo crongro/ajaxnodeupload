@@ -27,34 +27,8 @@ exports.jsonTest = function(req,res) {
 //Photo Ajax Routing
 exports.photoHandler = function(req, res) {
 
-    var _aPhoto     = req.files.photo;
-    var _nFileCount = _aPhoto.length;
-
-    var jsonData = {
-                        "photoLen": _nFileCount,
-                        "aPhotoInfo": []
-                   };
-
-
-   for (var i = _nFileCount - 1; i >= 0; i--) {
-
-        var _name = _aPhoto[i].name;
-        var _size = _aPhoto[i].size;
-        var _path = _aPhoto[i].path;
-
-        jsonData.aPhotoInfo[i] = {
-            "name": _name,
-            "size": _size,
-            "path": _path.replace(/\/Users.*\/webNode\/uploads/,""),
-        };
-   }
-
-
-   console.dir(jsonData);
-
-   console.log(req.files.photo[1]);
-
-   var strJSON = JSON.stringify(jsonData);
+   var oJsonData = getJsonData(req);
+   var strJSON = JSON.stringify(oJsonData);
    res.end(strJSON);
 };
 
@@ -72,3 +46,28 @@ exports.urisunsu = function(db) {
         });
     };
  };
+
+ function getJsonData (req) {
+    var _aPhoto     = req.files.photo;
+    var _nFileCount = _aPhoto.length;
+
+    var jsonData = {
+                        "photoLen": _nFileCount,
+                        "aPhotoInfo": []
+                   };
+
+   for (var i = _nFileCount - 1; i >= 0; i--) {
+
+        var _name = _aPhoto[i].name;
+        var _size = _aPhoto[i].size;
+        var _path = _aPhoto[i].path;
+
+        jsonData.aPhotoInfo[i] = {
+            "name": _name,
+            "size": _size,
+            "path": _path.replace(/\/Users.*\/webNode\/uploads/,""),
+        };
+   }
+
+   return jsonData;
+ }
