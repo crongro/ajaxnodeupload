@@ -23,7 +23,7 @@
 	        	} else {
 	        		elButton.innerHTML = "Oops... Upload Fail >.<" + request.status;
 		        }
-		    }
+		    };
 		}
 
 		(function() {
