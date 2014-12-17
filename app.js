@@ -3,7 +3,7 @@
  *   */
 var express = require('express');
 var routes = require('./routes');
-//var user = require('./routes/user');
+var user = require('./routes/user');
 //var jsonp = require('./routes/jsonp');
 var http = require('http');
 var path = require('path');
@@ -57,19 +57,11 @@ app.get('/jsonTest', routes.jsonTest);
 app.post('/photoUpload', routes.photoHandler);
 //app.get('/urisunsu', routes.urisunsu(db));
 
-//routing test
 // a middleware sub-stack which handles GET requests to /user/:id
-app.get('/user/:id', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-}, function (req, res, next) {
-  res.send('User Info');
-});
-
-
-app.get('/userpage/:id', function (req, res, next) {
-  res.render('special');
-});
+// session 테스트
+app.get('/user/login/:id', user.login);
+app.get('/user/checkSession', user.checkSession);
+app.get('/user/logout', user.logout);
 
 // redirect.
 app.get('/htmltest', function (req, res, next) {

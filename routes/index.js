@@ -2,6 +2,7 @@
  *  * GET home page.
  *   */
 
+
 exports.index = function(req, res){
     res.render('index', { title: 'Express' });
 };
@@ -46,6 +47,8 @@ exports.urisunsu = function(db) {
         });
     };
  };
+
+
 
  function getJsonData (req) {
     var _aPhoto     = req.files.photo;
